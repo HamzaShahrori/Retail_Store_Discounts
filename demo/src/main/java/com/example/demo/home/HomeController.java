@@ -2,33 +2,46 @@ package com.example.demo.home;
 
 
 import Products.Product;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 public class HomeController {
-    private List<Product> data= Arrays.asList(
-            new Product(1,"Potato","false",30,0),
-            new Product(2,"Cola","false",10,0),
-            new Product(3,"Chips","false",15,0),
-            new Product(4,"rice","false",35,0),
-            new Product(5,"oil","false",50,0),
-            new Product(6,"chocolate","false",5,0),
-            new Product(7,"mit","false",3,0)
-    );
 
+    @Autowired
+private ProductService productService;
    @RequestMapping(value = "/")
-   public List<Product> listProducts(){
-return data;
+   public List<Product> getAllProducts(){
+       return productService.findAll();
 
    }
-    @GetMapping(value ="/{name}" )
-   public String greetingWithRole(@PathVariable String name){
-return String.format("Welcome to the market as a %s",name);
+@GetMapping("/{id}")
+public Product getProductsById(@PathVariable int id ){
+return productService.getById(id);
+}
+
+@PutMapping("/{id}")
+    public Product addToCart(@PathVariable("id") int id,@RequestBody Product product){
+       return productService.addToBill(id,product);
+}
+
+
+    @GetMapping("/cart/{addToCart}")
+    public Product getCart(@PathVariable String addToCart ){
+        return productService.getCart(addToCart);
     }
+    @GetMapping(value ="/{role}" )
+   public List<Product>  findAllProductWithDiscount(@PathVariable String role){
+return  productService.findAllProductWithDiscount();
+    }
+//    @PutMapping(value ="/cart/{id}" )
+//    Product replaceProduct(@RequestBody Product newProduct,@PathVariable Long id){
+//       return  data.stream().map(product -> )
+//    }
+
+
+
 }
