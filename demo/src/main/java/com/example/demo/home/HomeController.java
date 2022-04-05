@@ -5,7 +5,6 @@ import Products.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -18,10 +17,10 @@ private ProductService productService;
        return productService.findAll();
 
    }
-    @GetMapping("/cart")
-    public List<Product> getCart(){
+    @GetMapping("/cart/{role}")
+    public int getCart(@PathVariable String role){
 //        System.out.println("endpoint");
-        return  productService.getCart();
+        return  productService.getCart(role);
     }
 @GetMapping("/{id}")
 public Product getProductsById(@PathVariable int id ){

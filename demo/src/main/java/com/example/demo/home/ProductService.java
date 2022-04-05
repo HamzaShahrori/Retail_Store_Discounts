@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ProductService {
@@ -41,10 +39,17 @@ public class ProductService {
         return data.stream().filter(element ->element.getId()==id).findFirst().get();
     }
 
-    public List<Product> getCart() {
+    public int getCart(String role) {
+        System.out.println(role.equals("employe") );
+        System.out.println(role);
 
-//        System.out.println("service");
-        return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
+
+        int i = data.stream().filter(element -> role.equals("employe")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();
+i=i-(i*30/100);
+        return i;
+
+//        System.out.println(role);
+//        return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
     }
 
 //    public Product findAllProductWithDiscount(String role) {
