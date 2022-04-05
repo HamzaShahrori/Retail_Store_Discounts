@@ -17,15 +17,25 @@ private ProductService productService;
        return productService.findAll();
 
    }
-    @GetMapping("/cart/{role}")
-    public int getCart(@PathVariable String role){
-//        System.out.println("endpoint");
-        return  productService.getCart(role);
+
+    @GetMapping("/cart")
+    public List<Product> getCart(){
+
+        return  productService.getCart();
+    }
+
+
+
+
+    @GetMapping("/bill/{role}")
+    public int getDiscountForEmployee(@PathVariable String role){
+
+        return  productService.getDiscountForEmployee(role);
     }
 
     @GetMapping("/price/{roleForCustomer}")
     public int getDiscountForRegularCustomer(@PathVariable String roleForCustomer){
-//        System.out.println("endpoint");
+
         return  productService.getDiscountForRegularCustomer(roleForCustomer);
     }
 @GetMapping("/{id}")
@@ -40,14 +50,7 @@ return productService.getById(id);
 
 
 
-//    @GetMapping(value ="/{role}" )
-//   public Product  findAllProductWithDiscount(@PathVariable String role){
-//return  productService.findAllProductWithDiscount(role);
-//    }
-//    @PutMapping(value ="/cart/{id}" )
-//    Product replaceProduct(@RequestBody Product newProduct,@PathVariable Long id){
-//       return  data.stream().map(product -> )
-//    }
+
 
 
 

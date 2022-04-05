@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -39,17 +40,16 @@ public class ProductService {
         return data.stream().filter(element ->element.getId()==id).findFirst().get();
     }
 
-    public int getCart(String role) {
-        System.out.println(role.equals("employe") );
+    public int getDiscountForEmployee(String role) {
+        System.out.println(role.equals("employee") );
         System.out.println(role);
         int i=0;
-if(role.equals("employe")){ i = data.stream().filter(element -> role.equals("employe")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();}
+if(role.equals("employee")){ i = data.stream().filter(element -> role.equals("employee")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();}
 
 i=i-(i*30/100);
         return i;
 
-//        System.out.println(role);
-//        return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
+
     }
 
 
@@ -62,20 +62,14 @@ i=i-(i*30/100);
         i=i-(i*10/100);
         return i;
 
-//        System.out.println(role);
-//        return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
+
     }
 
-//    public Product findAllProductWithDiscount(String role) {
-//        int discount =50;
-//        data.stream().forEach(element ->{
-//            if(role=="employee"){
-//;
-//
-//            }
-//
-//        });
-//
-//        return null;
-//    }
+    public List<Product> getCart() {
+
+
+        return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
+    }
+
+
 }
