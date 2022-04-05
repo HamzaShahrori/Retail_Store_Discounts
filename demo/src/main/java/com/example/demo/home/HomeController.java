@@ -51,7 +51,11 @@ return productService.getById(id);
 
 
 
+    @GetMapping("/total/{over100}")
+    public int getDiscountForEvery100(@PathVariable String over100){
 
+        return  productService.getDiscountForEvery100(over100);
+    }
 
 
 }

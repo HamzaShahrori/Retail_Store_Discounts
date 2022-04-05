@@ -14,8 +14,8 @@ public class ProductService {
             new Product(1,"Potato","true",30,0),
             new Product(2,"Cola","true",10,0),
             new Product(3,"Chips","false",15,0),
-            new Product(4,"rice","false",35,0),
-            new Product(5,"oil","false",50,0),
+            new Product(4,"rice","true",35,0),
+            new Product(5,"oil","true",50,0),
             new Product(6,"chocolate","false",5,0),
             new Product(7,"mit","false",3,0)
     )) ;
@@ -71,5 +71,21 @@ i=i-(i*30/100);
         return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
     }
 
+    public int getDiscountForEvery100(String over100) {
+
+        int i=0;
+
+
+        if(over100.equals("over100")){ i = data.stream().filter(element -> over100.equals("over100")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();}
+
+        if(i>100){ for (int a = i; a  >100; a=a-100) {
+i=i-5;
+        }}
+
+//        i=i-(i*10/100);
+        return i;
+
+
+    }
 
 }
