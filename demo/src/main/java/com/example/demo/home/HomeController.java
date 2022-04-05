@@ -18,6 +18,11 @@ private ProductService productService;
        return productService.findAll();
 
    }
+    @GetMapping("/cart")
+    public List<Product> getCart(){
+//        System.out.println("endpoint");
+        return  productService.getCart();
+    }
 @GetMapping("/{id}")
 public Product getProductsById(@PathVariable int id ){
 return productService.getById(id);
@@ -29,14 +34,11 @@ return productService.getById(id);
 }
 
 
-    @GetMapping("/cart/{addToCart}")
-    public Product getCart(@PathVariable String addToCart ){
-        return productService.getCart(addToCart);
-    }
-    @GetMapping(value ="/{role}" )
-   public List<Product>  findAllProductWithDiscount(@PathVariable String role){
-return  productService.findAllProductWithDiscount();
-    }
+
+//    @GetMapping(value ="/{role}" )
+//   public Product  findAllProductWithDiscount(@PathVariable String role){
+//return  productService.findAllProductWithDiscount(role);
+//    }
 //    @PutMapping(value ="/cart/{id}" )
 //    Product replaceProduct(@RequestBody Product newProduct,@PathVariable Long id){
 //       return  data.stream().map(product -> )
