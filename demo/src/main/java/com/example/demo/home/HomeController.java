@@ -22,6 +22,12 @@ private ProductService productService;
 //        System.out.println("endpoint");
         return  productService.getCart(role);
     }
+
+    @GetMapping("/price/{roleForCustomer}")
+    public int getDiscountForRegularCustomer(@PathVariable String roleForCustomer){
+//        System.out.println("endpoint");
+        return  productService.getDiscountForRegularCustomer(roleForCustomer);
+    }
 @GetMapping("/{id}")
 public Product getProductsById(@PathVariable int id ){
 return productService.getById(id);

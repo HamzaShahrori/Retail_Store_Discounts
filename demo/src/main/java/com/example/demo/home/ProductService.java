@@ -42,10 +42,24 @@ public class ProductService {
     public int getCart(String role) {
         System.out.println(role.equals("employe") );
         System.out.println(role);
+        int i=0;
+if(role.equals("employe")){ i = data.stream().filter(element -> role.equals("employe")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();}
 
-
-        int i = data.stream().filter(element -> role.equals("employe")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();
 i=i-(i*30/100);
+        return i;
+
+//        System.out.println(role);
+//        return (List<Product>) data.stream().filter(element ->element.getAddToCart()=="true").collect(Collectors.toList());
+    }
+
+
+    public int getDiscountForRegularCustomer(String roleForCustomer) {
+        System.out.println(roleForCustomer.equals("RegularCustomer") );
+        System.out.println(roleForCustomer);
+        int i=0;
+        if(roleForCustomer.equals("RegularCustomer")){ i = data.stream().filter(element -> roleForCustomer.equals("RegularCustomer")&&element.getAddToCart()=="true").mapToInt(Product::getPrice).sum();}
+
+        i=i-(i*10/100);
         return i;
 
 //        System.out.println(role);
